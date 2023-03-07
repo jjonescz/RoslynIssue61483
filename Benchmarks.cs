@@ -1,16 +1,25 @@
 ﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Diagnosers;
+using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-[DisassemblyDiagnoser(printSource: true)]
-[HideColumns("Error", "StdDev", "Median", "RatioSD")]
 public partial class Program
 {
-	static void Main(string[] args) => BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+	static void Main(string[] args)
+	{
+        var job = Job.ShortRun;
+		BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, ManualConfig.CreateMinimumViable()
+            .HideColumns("Error", "StdDev", "Median", "RatioSD")
+            .AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig(printSource: true)))
+			.AddJob(job.WithCustomBuildConfiguration("ReleaseCustomRoslyn"))
+			.AddJob(job.AsBaseline()));
+	}
 
-    [Benchmark, ArgumentsSource(nameof(GetArguments))]
+	[Benchmark, ArgumentsSource(nameof(GetArguments))]
     public int Compare1(int x, int y)
     {
         if (x < y) return -1;
