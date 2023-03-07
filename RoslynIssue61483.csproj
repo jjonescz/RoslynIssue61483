@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+	<OutputType>Exe</OutputType>
+	<LangVersion>Preview</LangVersion>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<ServerGarbageCollection>true</ServerGarbageCollection>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
+    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.13.5" />
+  </ItemGroup>
+</Project>
