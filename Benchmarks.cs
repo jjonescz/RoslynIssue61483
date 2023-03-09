@@ -13,7 +13,7 @@ public partial class Program
 		var jobs =
 			from runtime in new[] { CoreRuntime.Core70, CoreRuntime.Core80 }
 			from config in new[] { "Release", "ReleaseCustomRoslyn" }
-			select Job.Dry.WithRuntime(runtime).WithCustomBuildConfiguration(config);
+			select Job.ShortRun.WithRuntime(runtime).WithCustomBuildConfiguration(config);
 
 		BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, ManualConfig.CreateMinimumViable()
 			.HideColumns("Error", "StdDev", "Median", "RatioSD", "x", "y", "c")
