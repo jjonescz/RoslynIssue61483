@@ -17,7 +17,11 @@ public partial class Program
 
 		BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, ManualConfig.CreateMinimumViable()
 			.HideColumns("Error", "StdDev", "Median", "RatioSD", "x", "y", "c")
-			.AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig(printSource: true)))
+			.AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig(
+				printSource: true,
+				exportHtml: true,
+				exportCombinedDisassemblyReport: true,
+				exportDiff: true)))
 			.AddJob(jobs.ToArray()));
 	}
 

@@ -6,6 +6,11 @@
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	<ServerGarbageCollection>true</ServerGarbageCollection>
 	<Configurations>Debug;Release;ReleaseCustomRoslyn</Configurations>
+
+	<!-- Required for DisassemblyDiagnoser -->
+	<PlatformTarget>AnyCPU</PlatformTarget>
+	<DebugType>pdbonly</DebugType>
+	<DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
