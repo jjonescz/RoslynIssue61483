@@ -10,7 +10,7 @@ public partial class Program
 	{
 		var job = Job.ShortRun;
 		BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, ManualConfig.CreateMinimumViable()
-			.HideColumns("Error", "StdDev", "Median", "RatioSD")
+			.HideColumns("Error", "StdDev", "Median", "RatioSD", "x", "y", "c")
 			.AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig(printSource: true)))
 			.AddJob(job.WithCustomBuildConfiguration("ReleaseCustomRoslyn"))
 			.AddJob(job.AsBaseline()));
