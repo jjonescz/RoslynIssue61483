@@ -1,19 +1,24 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
+using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
+using System.Linq;
 
 public partial class Program
 {
 	static void Main(string[] args)
 	{
-		var job = Job.ShortRun;
+		var jobs =
+			from runtime in new[] { CoreRuntime.Core70, CoreRuntime.Core80 }
+			from config in new[] { "Release", "ReleaseCustomRoslyn" }
+			select Job.Dry.WithRuntime(runtime).WithCustomBuildConfiguration(config);
+
 		BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, ManualConfig.CreateMinimumViable()
 			.HideColumns("Error", "StdDev", "Median", "RatioSD", "x", "y", "c")
 			.AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig(printSource: true)))
-			.AddJob(job.WithCustomBuildConfiguration("ReleaseCustomRoslyn"))
-			.AddJob(job.AsBaseline()));
+			.AddJob(jobs.ToArray()));
 	}
 
 	[Benchmark, Arguments(1, 2)]
