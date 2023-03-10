@@ -1,17 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-	<OutputType>Exe</OutputType>
-	<LangVersion>Preview</LangVersion>
-	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	<ServerGarbageCollection>true</ServerGarbageCollection>
-	<Configurations>Debug;Release;ReleaseCustomRoslyn</Configurations>
+    <OutputType>Exe</OutputType>
+    <LangVersion>Preview</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+    <Configurations>Debug;Release;ReleaseCustomRoslyn</Configurations>
 
-	<!-- Required for DisassemblyDiagnoser -->
-	<PlatformTarget>AnyCPU</PlatformTarget>
-	<DebugType>pdbonly</DebugType>
-	<DebugSymbols>true</DebugSymbols>
+    <!-- Required for DisassemblyDiagnoser -->
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
     <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.13.5" />
@@ -20,4 +22,5 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
 </Project>
