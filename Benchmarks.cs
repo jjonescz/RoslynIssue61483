@@ -15,7 +15,7 @@ public partial class Program
 		var jobs =
 			from runtime in new[] { CoreRuntime.Core70, CoreRuntime.Core80 }
 			from config in new[] { "Release", "ReleaseCustomRoslyn" }
-			select Job.ShortRun.WithRuntime(runtime).WithCustomBuildConfiguration(config)
+			select Job.Default.WithRuntime(runtime).WithCustomBuildConfiguration(config)
 				.WithBaseline(runtime == CoreRuntime.Core80 && config == "Release");
 
 		BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, ManualConfig.CreateMinimumViable()
